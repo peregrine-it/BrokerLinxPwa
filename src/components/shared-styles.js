@@ -22,7 +22,6 @@ export const SharedStyles = css`
   }
 
   section > * {
-    max-width: 600px;
     margin-right: auto;
     margin-left: auto;
   }
@@ -35,6 +34,12 @@ export const SharedStyles = css`
     font-size: 24px;
     text-align: center;
     color: var(--app-dark-text-color);
+  }
+
+  .page-iframe {
+    height: 100vh;
+    width: 100%;
+    border: none;
   }
 
   @media (min-width: 460px) {

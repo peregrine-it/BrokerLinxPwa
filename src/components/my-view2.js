@@ -8,9 +8,9 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-import { html } from 'lit-element';
+import { html } from 'https://unpkg.com/lit-html@0.10.2/lit-html.js';
 import { PageViewElement } from './page-view-element.js';
-import { connect } from 'pwa-helpers/connect-mixin.js';
+import { connect } from 'https://unpkg.com/pwa-helpers@0.9.0/connect-mixin.js';
 
 // This element is connected to the Redux store.
 import { store } from '../store.js';
@@ -48,15 +48,7 @@ class MyView2 extends connect(store)(PageViewElement) {
   render() {
     return html`
       <section>
-        <h2>Redux example: simple counter</h2>
-        <div class="circle">${this._value}</div>
-        <p>This page contains a reusable <code>&lt;counter-element&gt;</code>. The
-        element is not built in a Redux-y way (you can think of it as being a
-        third-party element you got from someone else), but this page is connected to the
-        Redux store. When the element updates its counter, this page updates the values
-        in the Redux store, and you can see the current value of the counter reflected in
-        the bubble above.</p>
-        <br><br>
+        <button class="contact-btn" @click={this._handleClick}>Get my contacts</button>
       </section>
       <section>
         <p>
@@ -69,6 +61,28 @@ class MyView2 extends connect(store)(PageViewElement) {
         </p>
       </section>
     `;
+  }
+
+  _handleClick = () => {
+    gapi.client.setApiKey(apiKey);
+    window.setTimeout(this._authorize);
+  }
+
+  _authorize = () => {
+    gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, this._handleAuthorization);
+  }
+
+  _handleAuthorization = (authorizationResult) => {
+    if (authorizationResult && !authorizationResult.error) {
+        fetch(
+          "https://www.google.com/m8/feeds/contacts/default/thin?alt=json&access_token=" + authorizationResult.access_token + "&max-results=500&v=3.0",
+          {method: 'GET'}
+        )
+        .then(response => {
+            //process the response here
+            console.log(response);
+        });
+    }
   }
 
   _counterIncremented() {
