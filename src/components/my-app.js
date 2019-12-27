@@ -23,7 +23,8 @@ import { store } from '../store.js';
 import {
   navigate,
   updateOffline,
-  updateDrawerState
+  updateDrawerState,
+  updateFirstState,
 } from '../actions/app.js';
 
 // These are the elements needed by this element.
@@ -34,6 +35,15 @@ import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import { menuIcon } from './my-icons.js';
 import './snack-bar.js';
 
+// const google_client_id     = '548596808682-rm9ef9m7p1v2r5a51lq29kdp9dn3bbtt.apps.googleusercontent.com';
+const google_client_id = '475473977152-ar16j43cgja9m36l5jmkui8iqifpq00h.apps.googleusercontent.com'
+const google_client_secret = 'YBvlr7mmD1jnVxNYNL-vYY1t';
+const scope = 'https://www.google.com/m8/feeds%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email';
+// const google_redirect_uri  = 'https://brokerlinx.com/brokerlinxsyncapp/response-callback.php';
+const google_redirect_uri = "https://paw-starter.firebaseapp.com/view1";
+const googleImportUrl  = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${google_client_id}&response_type=code&scope=${scope}&redirect_uri=${google_redirect_uri}&access_type=offline`;
+
+
 class MyApp extends connect(store)(LitElement) {
   static get properties() {
     return {
@@ -41,7 +51,8 @@ class MyApp extends connect(store)(LitElement) {
       _page: { type: String },
       _drawerOpened: { type: Boolean },
       _snackbarOpened: { type: Boolean },
-      _offline: { type: Boolean }
+      _offline: { type: Boolean },
+      _firstTime: { type: Boolean },
     };
   }
 
@@ -193,49 +204,55 @@ class MyApp extends connect(store)(LitElement) {
 
   render() {
     // Anything that's related to rendering should be done in here.
-    return html`
-      <!-- Header -->
-      <app-header condenses reveals effects="waterfall">
-        <app-toolbar class="toolbar-top">
-          <button class="menu-btn" title="Menu" @click="${this._menuButtonClicked}">${menuIcon}</button>
-          <div main-title>${this.appTitle}</div>
-        </app-toolbar>
+    if (this._firstTime)  {
+      return html`
+        <a href="${googleImportUrl}">Get the Google link </a>
+      ` 
+    } else {
+      return html`
+        <!-- Header -->
+        <app-header condenses reveals effects="waterfall">
+          <app-toolbar class="toolbar-top">
+            <button class="menu-btn" title="Menu" @click="${this._menuButtonClicked}">${menuIcon}</button>
+            <div main-title>${this.appTitle}</div>
+          </app-toolbar>
 
-        <!-- This gets hidden on a small screen-->
-        <nav class="toolbar-list">
-          <a ?selected="${this._page === 'view1'}" href="/view1">View One</a>
-          <a ?selected="${this._page === 'view2'}" href="/view2">View Two</a>
-          <a ?selected="${this._page === 'view3'}" href="/view3">View Three</a>
-        </nav>
-      </app-header>
+          <!-- This gets hidden on a small screen-->
+          <nav class="toolbar-list">
+            <a ?selected="${this._page === 'view1'}" href="/view1">View One</a>
+            <a ?selected="${this._page === 'view2'}" href="/view2">View Two</a>
+            <a ?selected="${this._page === 'view3'}" href="/view3">View Three</a>
+          </nav>
+        </app-header>
 
-      <!-- Drawer content -->
-      <app-drawer
-          .opened="${this._drawerOpened}"
-          @opened-changed="${this._drawerOpenedChanged}">
-        <nav class="drawer-list">
-          <a ?selected="${this._page === 'view1'}" href="/view1">View One</a>
-          <a ?selected="${this._page === 'view2'}" href="/view2">View Two</a>
-          <a ?selected="${this._page === 'view3'}" href="/view3">View Three</a>
-        </nav>
-      </app-drawer>
+        <!-- Drawer content -->
+        <app-drawer
+            .opened="${this._drawerOpened}"
+            @opened-changed="${this._drawerOpenedChanged}">
+          <nav class="drawer-list">
+            <a ?selected="${this._page === 'view1'}" href="/view1">View One</a>
+            <a ?selected="${this._page === 'view2'}" href="/view2">View Two</a>
+            <a ?selected="${this._page === 'view3'}" href="/view3">View Three</a>
+          </nav>
+        </app-drawer>
 
-      <!-- Main content -->
-      <main role="main" class="main-content">
-        <my-view1 class="page" ?active="${this._page === 'view1'}"></my-view1>
-        <my-view2 class="page" ?active="${this._page === 'view2'}"></my-view2>
-        <my-view3 class="page" ?active="${this._page === 'view3'}"></my-view3>
-        <my-view404 class="page" ?active="${this._page === 'view404'}"></my-view404>
-      </main>
+        <!-- Main content -->
+        <main role="main" class="main-content">
+          <my-view1 class="page" ?active="${this._page === 'view1'}"></my-view1>
+          <my-view2 class="page" ?active="${this._page === 'view2'}"></my-view2>
+          <my-view3 class="page" ?active="${this._page === 'view3'}"></my-view3>
+          <my-view404 class="page" ?active="${this._page === 'view404'}"></my-view404>
+        </main>
 
-      <footer>
-        <p>Made with &hearts; by the Polymer team.</p>
-      </footer>
+        <footer>
+          <p>Made with &hearts; by the Polymer team.</p>
+        </footer>
 
-      <snack-bar ?active="${this._snackbarOpened}">
-        You are now ${this._offline ? 'offline' : 'online'}.
-      </snack-bar>
-    `;
+        <snack-bar ?active="${this._snackbarOpened}">
+          You are now ${this._offline ? 'offline' : 'online'}.
+        </snack-bar>
+      `;
+    }
   }
 
   constructor() {
@@ -243,6 +260,10 @@ class MyApp extends connect(store)(LitElement) {
     // To force all event listeners for gestures to be passive.
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
+    window.addEventListener('appinstalled', (event) => {
+      console.log('👍', 'appinstalled', event);
+      store.dispatch(updateFirstState(true));
+    });
   }
 
   firstUpdated() {
@@ -276,6 +297,7 @@ class MyApp extends connect(store)(LitElement) {
     this._offline = state.app.offline;
     this._snackbarOpened = state.app.snackbarOpened;
     this._drawerOpened = state.app.drawerOpened;
+    this._firstTime = state.app.firstTime;
   }
 }
 

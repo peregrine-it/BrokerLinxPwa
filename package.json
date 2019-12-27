@@ -19,9 +19,11 @@
     "test:regenerate_screenshots": "mocha test/integration/screenshots-baseline/regenerate.js --timeout=15000"
   },
   "dependencies": {
+    "@material/mwc-button": "^0.12.0",
+    "@material/mwc-dialog": "^0.12.0",
     "@polymer/app-layout": "^3.0.0",
     "@polymer/polymer": "^3.1.0",
-    "@webcomponents/webcomponentsjs": "^2.2.4",
+    "@webcomponents/webcomponentsjs": "^2.4.0",
     "lit-element": "^2.0.1",
     "lit-html": "^0.10.2",
     "pwa-helpers": "^0.9.0",

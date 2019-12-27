@@ -17,7 +17,8 @@ import { store } from '../store.js';
 
 // These are the actions needed by this element.
 import { increment, decrement } from '../actions/counter.js';
-
+import '@material/mwc-dialog';
+import '@material/mwc-button/mwc-button'
 // We are lazy loading its reducer.
 import counter from '../reducers/counter.js';
 store.addReducers({
@@ -55,7 +56,12 @@ class MyView2 extends connect(store)(PageViewElement) {
   render() {
     return html`
       <section>
-        <a href="${googleImportUrl}">Get the Google link </a>
+        <mwc-dialog open>
+          <div>
+            Give contact access to app
+            <a href="${googleImportUrl}">Accept</a>
+          </div>
+        </mwc-dialog>
       </section>
     `;
   }

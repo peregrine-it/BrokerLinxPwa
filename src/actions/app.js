@@ -13,6 +13,7 @@ export const UPDATE_OFFLINE = 'UPDATE_OFFLINE';
 export const UPDATE_DRAWER_STATE = 'UPDATE_DRAWER_STATE';
 export const OPEN_SNACKBAR = 'OPEN_SNACKBAR';
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
+export const UPDATE_FIRST_STATE = 'UPDATE_FIRST_STATE'
 
 export const navigate = (path) => (dispatch) => {
   // Extract the page name from path.
@@ -91,6 +92,13 @@ export const updateOffline = (offline) => (dispatch, getState) => {
 export const updateDrawerState = (opened) => {
   return {
     type: UPDATE_DRAWER_STATE,
+    opened
+  };
+};
+
+export const updateFirstState = (opened) => {
+  return {
+    type: UPDATE_FIRST_STATE,
     opened
   };
 };
