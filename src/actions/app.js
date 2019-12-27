@@ -30,15 +30,24 @@ export const navigate = (path) => (dispatch) => {
 const loadPage = (page) => (dispatch) => {
   switch(page) {
     case 'view1':
-      import('../components/my-view1.js').then((module) => {
+      import('../components/my-view1.js').then(async (module) => {
         // Put code in here that you want to run every time when
         // navigating to view1 after my-view1.js is loaded.
         console.log(getQueryStringValue('code'));
         if (getQueryStringValue('code')) {
           const code = getQueryStringValue('code');
-          fetch(`https://brokerlinx.com/crm/api?apikey=broker3112linux117&auth_code=${code}`, {method: 'GET'})
-          .then((res) => {
-            console.log(res);
+          fetch(`https://brokerlinx.com/crm/api?apikey=broker3112linux117&auth_code=${code}`, 
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json' 
+              },
+              mode: 'no-cors' 
+            }
+          )
+          .then((res) => res.json)
+          .then(result => {
+            console.log('respose data----------', result)
           });
         }
       });
