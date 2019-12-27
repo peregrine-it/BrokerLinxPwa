@@ -8,9 +8,10 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-import { html } from 'lit-element';
+import { html } from 'https://unpkg.com/lit-html@0.10.2/lit-html.js';
 import { PageViewElement } from './page-view-element.js';
-import { connect } from 'pwa-helpers/connect-mixin.js';
+import { connect } from 'https://unpkg.com/pwa-helpers@0.9.0/connect-mixin.js';
+
 
 // This element is connected to the Redux store.
 import { store } from '../store.js';
@@ -29,13 +30,11 @@ import './counter-element.js';
 
 // These are the shared styles needed by this element.
 import { SharedStyles } from './shared-styles.js';
-// const google_client_id     = '548596808682-rm9ef9m7p1v2r5a51lq29kdp9dn3bbtt.apps.googleusercontent.com';
-const google_client_id = '475473977152-ar16j43cgja9m36l5jmkui8iqifpq00h.apps.googleusercontent.com'
-const google_client_secret = 'YBvlr7mmD1jnVxNYNL-vYY1t';
-const scope = 'https://www.google.com/m8/feeds%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email';
-// const google_redirect_uri  = 'https://brokerlinx.com/brokerlinxsyncapp/response-callback.php';
-const google_redirect_uri = "https://paw-starter.firebaseapp.com/view1";
-const googleImportUrl  = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${google_client_id}&response_type=code&scope=${scope}&redirect_uri=${google_redirect_uri}&access_type=offline`;
+
+// var google_client_id     = '548596808682-rm9ef9m7p1v2r5a51lq29kdp9dn3bbtt.apps.googleusercontent.com';
+// var google_client_secret = 'YBvlr7mmD1jnVxNYNL-vYY1t';
+// var google_redirect_uri  = 'https://brokerlinx.com/brokerlinxsyncapp/response-callback.php';
+// var googleImportUrl  = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${google_client_id}&response_type=code&redirect_uri=${google_redirect_uri}&access_type=offline`;
 
 class MyView2 extends connect(store)(PageViewElement) {
   static get properties() {
@@ -55,18 +54,25 @@ class MyView2 extends connect(store)(PageViewElement) {
   render() {
     return html`
       <section>
-        <a href="${googleImportUrl}">Get the Google link </a>
+        <p>
+          <counter-element
+              value="${this._value}"
+              clicks="${this._clicks}"
+              @counter-incremented="${this._counterIncremented}"
+              @counter-decremented="${this._counterDecremented}">
+          </counter-element>
+        </p>
       </section>
     `;
   }
 
-  // _counterIncremented() {
-  //   store.dispatch(increment());
-  // }
+  _counterIncremented() {
+    store.dispatch(increment());
+  }
 
-  // _counterDecremented() {
-  //   store.dispatch(decrement());
-  // }
+  _counterDecremented() {
+    store.dispatch(decrement());
+  }
 
   // This is called every time something is updated in the store.
   stateChanged(state) {

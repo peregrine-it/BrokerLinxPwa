@@ -22,6 +22,7 @@ class MyView1 extends PageViewElement {
   }
 
   render() {
+    console.log('sagdhjagsjhd');
     return html`
       <section>
         <iframe class="page-iframe" scrolling="no" frameborder="0" src="https://console.command.kw.com/command" />

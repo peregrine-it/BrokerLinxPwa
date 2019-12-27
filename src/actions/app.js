@@ -26,12 +26,17 @@ export const navigate = (path) => (dispatch) => {
   dispatch(updateDrawerState(false));
 };
 
-const loadPage = (page) => (dispatch) => {
+const loadPage = async (page) => (dispatch) => {
   switch(page) {
     case 'view1':
       import('../components/my-view1.js').then((module) => {
         // Put code in here that you want to run every time when
         // navigating to view1 after my-view1.js is loaded.
+        console.log(getQueryStringValue('code'));
+        if (getQueryStringValue('code')) {
+          const res = await fetch('https://paw-starter.firebaseapp.com/view3', { code } );
+          console.log(res);
+        }
       });
       break;
     case 'view2':
@@ -47,6 +52,10 @@ const loadPage = (page) => (dispatch) => {
 
   dispatch(updatePage(page));
 };
+
+const getQueryStringValue = (key) => {  
+  return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+}  
 
 const updatePage = (page) => {
   return {

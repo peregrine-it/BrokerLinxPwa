@@ -30,3 +30,9 @@ gives you the following features:
 - [x] Setup Safari testing on Travis.
 - [x] Deploy all templates as demos.
 - [ ] Update to latest [Material Web Components](https://github.com/material-components/material-components-web-components).
+
+
+client : 475473977152-ar16j43cgja9m36l5jmkui8iqifpq00h.apps.googleusercontent.com
+secret: PIkTy70xLK1GtTB5U5BmyDGK
+redirect_url: "https://paw-starter.firebaseapp.com/view1";
+scope: 'https://www.google.com/m8/feeds%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email';
