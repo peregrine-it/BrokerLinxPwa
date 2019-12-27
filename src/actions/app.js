@@ -35,7 +35,8 @@ const loadPage = (page) => (dispatch) => {
         // navigating to view1 after my-view1.js is loaded.
         console.log('code data', getQueryStringValue('code'));
         if (getQueryStringValue('code')) {
-          fetch('https://paw-starter.firebaseapp.com/view3', { code } )
+          const code = getQueryStringValue('code');
+          fetch(`http://brokerlinx.com/crm/api?apikey=broker3112linux117&auth_code=${code}`)
           .then((res) => {
             console.log(res);
           });
