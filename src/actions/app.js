@@ -33,10 +33,10 @@ const loadPage = (page) => (dispatch) => {
       import('../components/my-view1.js').then((module) => {
         // Put code in here that you want to run every time when
         // navigating to view1 after my-view1.js is loaded.
-        console.log('code data', getQueryStringValue('code'));
+        console.log(getQueryStringValue('code'));
         if (getQueryStringValue('code')) {
           const code = getQueryStringValue('code');
-          fetch(`http://brokerlinx.com/crm/api?apikey=broker3112linux117&auth_code=${code}`)
+          fetch(`https://brokerlinx.com/crm/api?apikey=broker3112linux117&auth_code=${code}`, {method: 'GET'})
           .then((res) => {
             console.log(res);
           });
