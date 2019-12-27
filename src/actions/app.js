@@ -42,7 +42,6 @@ const loadPage = (page) => (dispatch) => {
               headers: {
                 'Content-Type': 'application/json' 
               },
-              mode: 'no-cors' 
             }
           )
           .then((res) => {
