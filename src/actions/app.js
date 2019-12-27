@@ -45,9 +45,8 @@ const loadPage = (page) => (dispatch) => {
               mode: 'no-cors' 
             }
           )
-          .then((res) => res.json)
-          .then(result => {
-            console.log('respose data----------', result)
+          .then((res) => {
+            console.log('respose data----------', res)
           });
         }
       });
