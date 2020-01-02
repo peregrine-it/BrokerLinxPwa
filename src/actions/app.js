@@ -17,7 +17,7 @@ export const UPDATE_FIRST_STATE = 'UPDATE_FIRST_STATE'
 
 export const navigate = (path) => (dispatch) => {
   // Extract the page name from path.
-  const page = path === '/' ? 'view2' : path.slice(1);
+  const page = path === '/my-app' ? 'view2' : path.slice(1);
 
   // Any other info you might want to extract from the path (like page type),
   // you can do here
@@ -30,7 +30,7 @@ export const navigate = (path) => (dispatch) => {
 const loadPage = (page) => (dispatch) => {
   switch(page) {
     case 'view1':
-      import('../components/my-view1.js').then(async (module) => {
+      import('../components/my-view1.js.js').then(async (module) => {
         // Put code in here that you want to run every time when
         // navigating to view1 after my-view1.js is loaded.
         console.log(getQueryStringValue('code'));
@@ -52,14 +52,14 @@ const loadPage = (page) => (dispatch) => {
       });
       break;
     case 'view2':
-      import('../components/my-view2.js');
+      import('../components/my-view2.js.js');
       break;
     case 'view3':
-      import('../components/my-view3.js');
+      import('../components/my-view3.js.js');
       break;
     default:
       page = 'view404';
-      import('../components/my-view404.js');
+      import('../components/my-view404.js.js');
   }
 
   dispatch(updatePage(page));
