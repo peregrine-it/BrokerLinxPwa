@@ -1,7 +1,7 @@
 .page-build{display:none;}
 
-.header-light .header-logo, .footer-light .footer-logo{background-image:url(../images/logo-dark.png);}
-.header-dark .header-logo, .footer-dark .footer-logo{background-image:url(../images/logo-light.png);}
+.header-light .header-logo, .footer-light .footer-logo{background-image:url(../code/images/logo-dark.png);}
+.header-dark .header-logo, .footer-dark .footer-logo{background-image:url(../code/images/logo-light.png);}
 
 .header .header-logo{
 	background-size:70px 16px;
@@ -18,7 +18,7 @@
 }
 
 .menu-header .menu-logo{
-	background-image:url(../images/logo.png);
+	background-image:url(../code/images/logo.png);
 	background-color:rgba(255,255,255,0.05);
 	padding:5px;
 	border:solid 1px rgba(0,0,0,0.1);
