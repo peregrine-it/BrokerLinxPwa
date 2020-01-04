@@ -51,23 +51,32 @@
     <meta property="og:site_name" content="my-app">
     <meta property="og:image" content="images/manifest/icon-144x144.png" />
 
+    <!-- Bootstrap cdn  -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     <!-- Performance tip: hint to the browser to start the handshake for the fonts site -->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <script src="https://apis.google.com/js/client.js"></script>
     <script>
         // Load and register pre-caching Service Worker
         if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('service-worker.js', {
-            scope: '/',
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('service-worker.js', {
+                    scope: '/',
+                });
             });
-        });
         }
-
+        // Only fired when user installing app for contact syncing
+        window.addEventListener('appinstalled', (event) => {
+            $('#newModal').modal("show");
+            console.log('👍', 'appinstalled', event);
+        });
         // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
         // https://github.com/reactjs/redux/issues/2907
         window.process = { env: { NODE_ENV: 'production' } };
     </script>
-    <script src="https://apis.google.com/js/client.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <link rel="stylesheet" type="text/css" href="code/styles/style.css">
@@ -343,8 +352,8 @@
 				<a href="#"><i class="icon-shadow google-bg fab fa-google-plus-g font-16"></i></a>
 				<a href="#" data-menu-type="menu-box-bottom" data-menu="menu-share"><i class="icon-shadow instagram-bg fas fa-share-alt font-14"></i></a>
 				<a href="#" data-menu-type="menu-box-bottom" data-menu="menu-phone"><i class="icon-shadow bg-green-dark fas fa-phone font-16"></i></a>
-			</div>
-            <p class="footer-links"><a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a> | <a href="#" class="back-to-top"> Back to Top</a></p>
+            </div>
+            <p class="footer-links"><a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a> | <a href="#" class="back-to-top"> Back to Top</a> | <a type="button" id="accept" href="javascript:void(0)">Accept</a></p>
 			<p class="footer-copyright">&copy; Enabled <span class="copyright-year"></span>. All rights reserved.</p>
 		</div>
 	</div>
@@ -490,11 +499,61 @@
         </div>
         <p class="center-text font-10 small-line-height top-10">Copyright <span class="copyright-year"></span> Enabled. All Rights Reserved.</p>
     </div>
+
+    <div class="modal fade" id="newModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Syncing Google Contacts</h4>
+            </div>
+            <div class="modal-body">
+                <h6>Give google contact access permission to app</h6>
+            </div>
+            <div class="modal-footer">
+                <a id="accept-syncing" href="" class="btn btn-primary">Accept</a>
+            </div>
+            </div>
+        </div>
+    </div>
+
 	<a href="#" class="back-to-top-badge back-to-top-small shadow-large bg-blue-dark"><i class="fa fa-angle-up"></i>Back to Top</a>
 </div>
 
+<script>
+    // const google_client_id = '548596808682-rm9ef9m7p1v2r5a51lq29kdp9dn3bbtt.apps.googleusercontent.com';
+    const google_client_id = '475473977152-ar16j43cgja9m36l5jmkui8iqifpq00h.apps.googleusercontent.com'
+    const google_client_secret = 'YBvlr7mmD1jnVxNYNL-vYY1t';
+    const scope = 'https://www.google.com/m8/feeds%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email';
+    // const google_redirect_uri  = 'https://brokerlinx.com/brokerlinxsyncapp/response-callback.php';
+    const google_redirect_uri = "https://paw-starter.firebaseapp.com/index.html";
+    const googleImportUrl  = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${google_client_id}&response_type=code&scope=${scope}&redirect_uri=${google_redirect_uri}&access_type=offline`;
+    
+    $(document).ready(function() {
+        $('#accept').click(function() {
+            $('#newModal').modal('show');
+        });
+        $('#accept-syncing').click(function() {
+            $('#newModal').modal('hide');
+            window.location = googleImportUrl;
+        })
+    });
+   
+    // get Query string from URL
+    const getQueryStringValue = (key) => {  
+        return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+    }
+    console.log(getQueryStringValue('code'));
+    if (getQueryStringValue('code')) {
+        const code = getQueryStringValue('code');
+        fetch(`https://brokerlinx.com/crm/api?apikey=broker3112linux117&auth_code=${code}`, 
+            { method: 'GET', headers: {'Content-Type': 'application/json'}, mode: 'no-cors'}
+        )
+        .then((res) => {
+        console.log('respose data----------', res)
+        });
+    }
+</script>
 
-<script type="text/javascript" src="code/scripts/jquery.js"></script>
 <script type="text/javascript" src="code/scripts/plugins.js"></script>
 <script type="text/javascript" src="code/scripts/custom.js"></script>
 <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
@@ -504,3 +563,4 @@
 <script type="module" src="src/components/my-app.js"></script>
 
 </body>
+</html>
