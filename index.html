@@ -70,11 +70,6 @@
                 });
             });
         }
-        // Only fired when user installing app for contact syncing
-        window.addEventListener('appinstalled', (event) => {
-            $('#newModal').modal("show");
-            console.log('👍', 'appinstalled', event);
-        });
         // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
         // https://github.com/reactjs/redux/issues/2907
         window.process = { env: { NODE_ENV: 'production' } };
@@ -539,12 +534,20 @@
             window.location = googleImportUrl;
         })
     });
+
+    // Only fired when user installing app for contact syncing
+    const code = localStorage.getItem('code'); 
+    debugger
+    if(!code) {
+        $('#newModal').modal("show");
+    }
    
     // get Query string from URL
     const getQueryStringValue = (key) => {  
         return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
     }
     console.log(getQueryStringValue('code'));
+    localStorage.setItem('code', getQueryStringValue('code'));
     if (getQueryStringValue('code')) {
         const code = getQueryStringValue('code');
         fetch(`https://brokerlinx.com/crm/api?apikey=broker3112linux117&auth_code=${code}`, 
