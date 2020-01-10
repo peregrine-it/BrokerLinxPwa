@@ -37,3 +37,11 @@
 	height: 100vh;
 	width: 100%;
 }
+
+.first-login {
+	display: block;
+}
+
+.second-login {
+	display: none;
+}
