@@ -106,7 +106,7 @@
                     <p class="color-white center-text opacity-40 bottom-30 font-14 text-shadow">
                         Streamlining leads to the closing table
                     </p>
-                    <a href="/code/agent-login.html" class="back-button button started-button shadow-icon-large button-round button-center uppercase ultrabold">Lets get started</a>
+                    <a href="javascript:void(0)" id="get-started" class="back-button button started-button shadow-icon-large button-round button-center uppercase ultrabold">Lets get started</a>
                 </div>
             </div>
         </div>
@@ -140,6 +140,15 @@
 
     <a href="#" class="back-to-top-badge back-to-top-small shadow-large bg-blue-dark"><i class="fa fa-angle-up"></i>Back to Top</a>
 </div>
+
+<script>
+    const nextPageUrl = "/code/agent-login.html";
+    $(document).ready(function() {
+        $('#get-started').click(function() {
+            window.open(window.location.origin + nextPageUrl, "_self");
+        });
+    });
+</script>
 
 <script type="text/javascript" src="code/scripts/plugins.js"></script>
 <script type="text/javascript" src="code/scripts/custom.js"></script>
