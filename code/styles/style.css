@@ -38,12 +38,12 @@
 	width: 100%;
 }
 
-.first-login {
-	display: block;
+.show {
+	display: block !important;
 }
 
-.second-login {
-	display: none;
+.hide {
+	display: none !important;
 }
 
 .started-button {
