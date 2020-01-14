@@ -7,6 +7,11 @@
 <link rel="stylesheet" type="text/css" href="styles/style.css">
 <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
 <link rel="stylesheet" type="text/css" href="styles/framework.css">
+ <!-- Bootstrap cdn  -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 </head>
 
@@ -83,33 +88,29 @@
                 <p class="smaller-text bottom-0">Register now. It's free!</p>
                 <div class="page-login-field top-15">
                     <i class="fa fa-user"></i>
-                    <input type="text" placeholder="Select a Username">
+                    <input id="signup-username" type="text" placeholder="Select a Username">
                     <em>(required)</em>
                 </div>
                 <div class="page-login-field">
                     <i class="fa fa-at"></i>
-                    <input type="text" placeholder="Your your Email">
+                    <input id="signup-email" type="text" placeholder="Your your Email">
                     <em>(required)</em>
                 </div>
                 <div class="page-login-field">
                     <i class="fa fa-lock"></i>
-                    <input type="password" placeholder="Enter a Password">
+                    <input id="signup-pwd" type="password" placeholder="Enter a Password">
                     <em>(required)</em>
                 </div>
                 <div class="page-login-field bottom-30">
                     <i class="fa fa-lock"></i>
-                    <input type="password" placeholder="Confirm Password">
+                    <input id="signup-confirm-pwd" type="password" placeholder="Confirm Password">
                     <em>(required)</em>
                 </div>
                 <div class="page-login-links bottom-10">
                     <a class="forgot center-text" href="page-signup.html"><i class="fa fa-user float-right"></i>Alread registered? Sign in here</a>
                     <div class="clear"></div>
                 </div>
-                <a href="#" class="button button-blue bottom-30 button-full button-round shadow-icon-large button-s uppercase ultrabold">Register Account</a>
-                <div class="decoration"></div>
-                <a href="#" class="button shadow-icon-large bottom-20 button-social bottom-15 button-full button-sm button-round button-icon facebook-bg"><i class="fab fa-facebook-f"></i> Connect with Facebook</a>
-                <a href="#" class="button shadow-icon-large bottom-20 button-social bottom-15 button-full button-sm button-round button-icon twitter-bg"><i class="fab fa-twitter"></i> Connect with Twitter</a>
-                <a href="#" class="button shadow-icon-large bottom-20 button-social bottom-15 button-full button-sm button-round button-icon google-bg"><i class="fab fa-google-plus-g"></i> Connect with Google Plus</a>
+                <a id="sign-up-button" href="javascript void(0)" class="button button-blue bottom-30 button-full button-round shadow-icon-large button-s uppercase ultrabold">Register Account</a>
             </div>
         </div>
 
@@ -226,8 +227,26 @@
 	<a href="#" class="back-to-top-badge back-to-top-small shadow-large bg-blue-dark"><i class="fa fa-angle-up"></i>Back to Top</a>
 </div>
 
+<script>
+    const nextPageUrl = "main-home.html";
+    $(document).ready(function() {
+        $('#sign-up-button').click(function() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-pwd').value;
+            const data = {
+                username,
+                password,
+            }
+            fetch(`https://brokerlinx.com/crm/api/signup`, 
+                { method: 'POST', headers: {'Content-Type': 'application/json'}, mode: 'no-cors'}
+            ).then((res) => {
+                console.log('respose data----------', res)
+            });
+            window.open(nextPageUrl);
+        })
+    });
+</script>
 
-<script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
 

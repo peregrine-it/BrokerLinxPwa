@@ -7,6 +7,11 @@
 <link rel="stylesheet" type="text/css" href="styles/style.css">
 <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
 <link rel="stylesheet" type="text/css" href="styles/framework.css">
+ <!-- Bootstrap cdn  -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 </head>
 
@@ -85,20 +90,20 @@
                 <p class="smaller-text bottom-15">Hello, stranger! Please enter your credentials below.</p>
                 <div class="page-login-field top-15">
                     <i class="fa fa-user"></i>
-                    <input type="text" placeholder="Username">
+                    <input id="login-username" type="text" placeholder="Username">
                     <em>(required)</em>
                 </div>
                 <div class="page-login-field bottom-20">
                     <i class="fa fa-lock"></i>
-                    <input type="password" placeholder="Password">
+                    <input id="login-pwd" type="password" placeholder="Password">
                     <em>(required)</em>
                 </div>
                 <div class="page-login-links bottom-10">
-                    <a class="forgot float-right" href="page-signup.html"><i class="fa fa-user float-right"></i>Create Account</a>
+                    <a class="forgot float-right" href="agent-signup.html"><i class="fa fa-user float-right"></i>Create Account</a>
                     <a class="create float-left" href="page-forgot.html"><i class="fa fa-eye"></i>Forgot Password</a>
                     <div class="clear"></div>
                 </div>
-                <a href="#" class="button button-green button-full shadow-icon-large button-round button-s uppercase ultrabold">LOGIN</a>
+                <a href="javascript:void(0)" id="agent-login-button" class="button button-green button-full shadow-icon-large button-round button-s uppercase ultrabold">LOGIN</a>
             </div>
         </div>
 
@@ -120,7 +125,7 @@
 					</p>
 					<a href="#" class="button button-round color-white button-blue button-xs button-center close-menu uppercase bold top-30">Return to Site</a>
 				</div>
-				<form action="php/contact.php" method="post" class="contactForm" id="contactForm">
+				<form method="post" class="contactForm" id="contactForm">
 					<fieldset>
 						<div class="formValidationError" id="contactNameFieldError">Name is required!</div>
 						<div class="formValidationError" id="contactEmailFieldError">Mail address required!</div>
@@ -215,8 +220,32 @@
 	<a href="#" class="back-to-top-badge back-to-top-small shadow-large bg-blue-dark"><i class="fa fa-angle-up"></i>Back to Top</a>
 </div>
 
+<script>
+    const nextPageUrl = "main-home.html";
+    $(document).ready(function() {
+        $('#agent-login-button').click(function() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-pwd').value;
+            const apiKey = 'broker3112linux117';
+            fetch(`https://brokerlinx.com/crm/api/login?username=${username}&password=${password}&apikey=${apiKey}`, 
+                { method: 'POST', headers: {'Content-Type': 'application/json'}}
+            ).then((res) => {
+                res.json();
+            }).then((data) => {
+                debugger
+                if (data.cmd_linx === 'Yes') {
+                    console.log('respose data----------', data)
+                    localStorage.setItem('cmd-link', data.cmd_linx)
+                    window.location = nextPageUrl;
+                } else {
+                    localStorage.setItem('cmd-link', '')
+                    window.location = nextPageUrl;
+                }
+            });
+        })
+    });
+</script>
 
-<script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
 
