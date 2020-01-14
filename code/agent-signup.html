@@ -231,18 +231,26 @@
     const nextPageUrl = "main-home.html";
     $(document).ready(function() {
         $('#sign-up-button').click(function() {
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-pwd').value;
-            const data = {
-                username,
-                password,
-            }
-            fetch(`https://brokerlinx.com/crm/api/signup`, 
-                { method: 'POST', headers: {'Content-Type': 'application/json'}, mode: 'no-cors'}
-            ).then((res) => {
-                console.log('respose data----------', res)
+            const email = document.getElementById('signup-email').value;
+            const username = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-pwd').value;
+            const confirmation_password = document.getElementById('signup-confirm-pwd').value;
+            const apiKey = 'broker3112linux117';
+            $.ajax({
+                url: `https://brokerlinx.com/crm/api/login?username=${username}&password=${password}&apikey=${apiKey}`,
+                cache: false,
+                type: "POST",
+                success: function(res){
+                    if (res.cmd_linx === 'Yes') {
+                        console.log('respose data----------', res)
+                        localStorage.setItem('cmd_link', res.cmd_linx)
+                        window.location = nextPageUrl;
+                    } else {
+                        localStorage.setItem('cmd_link', '')
+                        window.location = nextPageUrl;
+                    }
+                }
             });
-            window.open(nextPageUrl);
         })
     });
 </script>

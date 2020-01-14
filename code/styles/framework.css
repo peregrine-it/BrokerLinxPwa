@@ -6131,3 +6131,8 @@ input[type="range"]::-webkit-slider-thumb:after{
     transition:all 350ms ease;
 }
 
+.contact-sync-popup {
+	margin: 0 auto;
+	top: 40%;
+	width: 80%;
+}

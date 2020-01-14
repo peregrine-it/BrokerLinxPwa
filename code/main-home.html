@@ -95,6 +95,26 @@
 <div id="page-transitions" class="page-build">
     <div class="page-bg gradient-body-1"></div>
 
+    <div id="popup-page">
+        <div class="coverpage-full walkthrough-buttons">
+            <div class="modal fade" id="newModal" role="dialog">
+                <div class="modal-dialog contact-sync-popup">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Syncing Google Contacts</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h6>Give google contact access permission to app</h6>
+                        </div>
+                        <div class="modal-footer">
+                            <a id="accept-syncing" href="javascript:void(0)" class="btn btn-primary">Accept</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="home-page">
         <div class="header shadow-large header-light header-logo-app">
             <a href="index.html" class="header-logo"></a>
@@ -497,22 +517,6 @@
             </div>
             <p class="center-text font-10 small-line-height top-10">Copyright <span class="copyright-year"></span> Enabled. All Rights Reserved.</p>
         </div>
-
-        <div class="modal fade" id="newModal" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Syncing Google Contacts</h4>
-                </div>
-                <div class="modal-body">
-                    <h6>Give google contact access permission to app</h6>
-                </div>
-                <div class="modal-footer">
-                    <a id="accept-syncing" href="javascript:void(0)" class="btn btn-primary">Accept</a>
-                </div>
-                </div>
-            </div>
-        </div>
     </div>
 	<a href="#" class="back-to-top-badge back-to-top-small shadow-large bg-blue-dark"><i class="fa fa-angle-up"></i>Back to Top</a>
 </div>
@@ -523,15 +527,21 @@
     const google_client_secret = 'YBvlr7mmD1jnVxNYNL-vYY1t';
     const scope = 'https://www.google.com/m8/feeds%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email';
     // const google_redirect_uri  = 'https://brokerlinx.com/brokerlinxsyncapp/response-callback.php';
-    const google_redirect_uri = "https://paw-starter.firebaseapp.com/index.html";
+    const google_redirect_uri = "https://paw-starter.firebaseapp.com/code/main-home.html";
     const googleImportUrl  = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${google_client_id}&response_type=code&scope=${scope}&redirect_uri=${google_redirect_uri}&access_type=offline`;
     
     // Only fired when user installing app for contact syncing
-    const cmd = localStorage.getItem('cmd-link'); 
+    const cmd = localStorage.getItem('cmd_link'); 
+    const code = localStorage.getItem('code');
+    if(cmd !== "" || code !== "") {
+        $('#popup-page').addClass('second-login');
+        $('#home-page').addClass('first-login');
+    } else {
+        $('#newModal').modal('show');
+        $('#home-page').addClass('second-login');
+        $('#popup-page').addClass('first-login');
+    }
     $(document).ready(function() {
-        // $('#accept').click(function() {
-        //     $('#newModal').modal('show');
-        // });
         $('#accept-syncing').click(function() {
             window.open(googleImportUrl);
         })
@@ -545,11 +555,13 @@
     localStorage.setItem('code', getQueryStringValue('code'));
     if (getQueryStringValue('code')) {
         const code = getQueryStringValue('code');
-        fetch(`https://brokerlinx.com/crm/api?apikey=broker3112linux117&auth_code=${code}`, 
-            { method: 'GET', headers: {'Content-Type': 'application/json'}, mode: 'no-cors'}
-        )
-        .then((res) => {
-        console.log('respose data----------', res)
+        $.ajax({
+            url: `https://brokerlinx.com/crm/api?apikey=broker3112linux117&auth_code=${code}`,
+            cache: false,
+            type: "GET",
+            success: function(res){
+                console.log(res);
+            }
         });
     }
 </script>

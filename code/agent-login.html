@@ -227,19 +227,19 @@
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-pwd').value;
             const apiKey = 'broker3112linux117';
-            fetch(`https://brokerlinx.com/crm/api/login?username=${username}&password=${password}&apikey=${apiKey}`, 
-                { method: 'POST', headers: {'Content-Type': 'application/json'}}
-            ).then((res) => {
-                res.json();
-            }).then((data) => {
-                debugger
-                if (data.cmd_linx === 'Yes') {
-                    console.log('respose data----------', data)
-                    localStorage.setItem('cmd-link', data.cmd_linx)
-                    window.location = nextPageUrl;
-                } else {
-                    localStorage.setItem('cmd-link', '')
-                    window.location = nextPageUrl;
+            $.ajax({
+                url: `https://brokerlinx.com/crm/api/login?username=${username}&password=${password}&apikey=${apiKey}`,
+                cache: false,
+                type: "POST",
+                success: function(res){
+                    if (res.cmd_linx === 'Yes') {
+                        console.log('respose data----------', res)
+                        localStorage.setItem('cmd_link', res.cmd_linx)
+                        window.location = nextPageUrl;
+                    } else {
+                        localStorage.setItem('cmd_link', '')
+                        window.location = nextPageUrl;
+                    }
                 }
             });
         })
