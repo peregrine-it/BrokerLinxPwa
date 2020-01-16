@@ -1,13 +1,85 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-<title>Kolor | HTML, CSS & JS Mobile Template | Epsilon X </title>
-<link rel="stylesheet" type="text/css" href="styles/style.css">
-<link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
-<link rel="stylesheet" type="text/css" href="styles/framework.css">
-<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <meta name="generator" content="PWA Starter Kit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="My App description">
+
+    <!--
+        The `<base>` tag below is present to support two advanced deployment options:
+        1) Differential serving. 2) Serving from a non-root path.
+
+        Instead of manually editing the `<base>` tag yourself, you should generally either:
+        a) Add a `basePath` property to the build configuration in your `polymer.json`.
+        b) Use the `--base-path` command-line option for `polymer build`.
+    -->
+    <base href="/">
+
+    <link rel="icon" href="images/favicon.ico">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- See https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="#3f51b5">
+
+    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="My App">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="My App">
+
+    <!-- Homescreen icons -->
+    <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
+
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#3f51b5">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Default twitter cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@username">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="my-app">
+    <meta property="og:image" content="images/manifest/icon-144x144.png" />
+
+    <!-- Bootstrap cdn  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- Hide bar -->
+    <script src="./hide-bar.js"></script>
+    <!-- Performance tip: hint to the browser to start the handshake for the fonts site -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <script src="https://apis.google.com/js/client.js"></script>
+    <script>
+        // Load and register pre-caching Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('service-worker.js', {
+                    scope: '/',
+                });
+            });
+        }
+        // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
+        // https://github.com/reactjs/redux/issues/2907
+        window.process = { env: { NODE_ENV: 'production' } };
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="code/styles/style.css">
+    <link rel="stylesheet" type="text/css" href="code/fonts/css/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="code/styles/framework.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 </head>
 
 <body>
@@ -27,46 +99,46 @@
         <div class="cover-content-center">
             <div class="landing-page">
                 <div class="landing-header">
-                    <h1 class="center-text fa-4x text-shadow ultrabold color-white bottom-10">KOLOR</h1>
                     <!-- replace image if you want to use a logo <a href="#"><img src="images/logo-light.png" alt="img"></a> -->
                     <em class="font-11 color-white opacity-60">Beauty and Simplicity Combined</em>
+                    <img class="cover-icon shadow-icon-large bottom-50" src="code/images/blinx concept_v2.jpg">
                 </div>
                 <div class="landing-icons">
                     <a href="index.html">
                         <i class="gradient-yellow-dark shadow-icon-large fa fa-star"></i>
-                        <em>Welcome</em>
+                        <em>Contacts</em>
                     </a>
                     <a href="components.html">
                         <i class="gradient-sky-light shadow-icon-large fa fa-cog"></i>
-                        <em>Components</em>
+                        <em>Contracts</em>
                     </a>         
                     <a href="interactive.html">
                         <i class="gradient-red-light shadow-icon-large fa fa-heart"></i>
-                        <em>Interactive</em>
+                        <em>Closings</em>
                     </a>            
                     <a href="galleries.html">
                         <i class="gradient-blue-light shadow-icon-large fa fa-camera"></i>
-                        <em>Gallery</em>
+                        <em>Compilance</em>
                     </a>
                     <a href="portfolios.html">
                         <i class="gradient-orange-light shadow-icon-large fa fa-image"></i>
-                        <em>Portfolio</em>
+                        <em>Stats</em>
                     </a>         
                     <a href="pages.html">
                         <i class="gradient-brown-light shadow-icon-large fa fa-file"></i>
-                        <em>Pages</em>
+                        <em>T&D</em>
                     </a>    
                     <a href="pageapps.html">
                         <i class="gradient-mint-light shadow-icon-large fa fa-mobile-alt"></i>
-                        <em>AppStyled</em>
+                        <em>T&D</em>
                     </a>
                     <a href="portfolios.html">
                         <i class="gradient-magenta-light shadow-icon-large fa fa-list"></i>
-                        <em>Templates</em>
+                        <em>T&D</em>
                     </a>         
                     <a href="contact.html">
                         <i class="gradient-green-dark shadow-icon-large fa fa-envelope"></i>
-                        <em>Contact</em>
+                        <em>T&D</em>
                     </a>
                     <div class="clear"></div>
                 </div>
@@ -79,9 +151,39 @@
     </div>
 </div>
 
+<script>
+    // const google_client_id = '548596808682-rm9ef9m7p1v2r5a51lq29kdp9dn3bbtt.apps.googleusercontent.com';
+    const google_client_id = '475473977152-ar16j43cgja9m36l5jmkui8iqifpq00h.apps.googleusercontent.com'
+    const google_client_secret = 'YBvlr7mmD1jnVxNYNL-vYY1t';
+    const scope = 'https://www.google.com/m8/feeds%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email';
+    // const google_redirect_uri  = 'https://brokerlinx.com/brokerlinxsyncapp/response-callback.php';
+    const google_redirect_uri = "https://paw-starter.firebaseapp.com/code/main-home.html";
+    const googleImportUrl  = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${google_client_id}&response_type=code&scope=${scope}&redirect_uri=${google_redirect_uri}&access_type=offline`;
+    
+    // Only fired when user installing app for contact syncing
+    // get Query string from URL
+    const getQueryStringValue = (key) => {  
+        return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+    }
+    console.log('code-----', getQueryStringValue('code'));
+    localStorage.setItem('code', getQueryStringValue('code'));
+    if (getQueryStringValue('code')) {
+        const code = getQueryStringValue('code');
+        $.ajax({
+            url: `https://brokerlinx.com/crm/api?apikey=broker3112linux117&auth_code=${code}`,
+            type: "GET",
+            success: function(res){
+                console.log('after contact syncing response', res);
+            }
+        });
+    }
+</script>
 
-<script type="text/javascript" src="scripts/jquery.js"></script>
-<script type="text/javascript" src="scripts/plugins.js"></script>
-<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="code/scripts/plugins.js"></script>
+<script type="text/javascript" src="code/scripts/custom.js"></script>
+<script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
+<!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+<!-- Built with love using PWA Starter Kit -->
+<script type="module" src="src/components/my-app.js"></script>
 
 </body>

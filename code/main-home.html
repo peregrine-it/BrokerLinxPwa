@@ -114,64 +114,6 @@
             </div>
         </div>
     </div>
-
-    <div id="home-page">
-        <div class="page-content page-content-full">
-            <div class="cover-item cover-item-full">
-            <div class="cover-content-center">
-                <div class="landing-page">
-                    <div class="landing-header">
-                        <h1 class="center-text fa-4x text-shadow ultrabold color-white bottom-10">KOLOR</h1>
-                        <!-- replace image if you want to use a logo <a href="#"><img src="images/logo-light.png" alt="img"></a> -->
-                        <em class="font-11 color-white opacity-60">Beauty and Simplicity Combined</em>
-                    </div>
-                    <div class="landing-icons">
-                        <a href="index.html">
-                            <i class="gradient-yellow-dark shadow-icon-large fa fa-star"></i>
-                            <em>Contacts</em>
-                        </a>
-                        <a href="components.html">
-                            <i class="gradient-sky-light shadow-icon-large fa fa-cog"></i>
-                            <em>Contracts</em>
-                        </a>         
-                        <a href="interactive.html">
-                            <i class="gradient-red-light shadow-icon-large fa fa-heart"></i>
-                            <em>Closings</em>
-                        </a>            
-                        <a href="galleries.html">
-                            <i class="gradient-blue-light shadow-icon-large fa fa-camera"></i>
-                            <em>Compilance</em>
-                        </a>
-                        <a href="portfolios.html">
-                            <i class="gradient-orange-light shadow-icon-large fa fa-image"></i>
-                            <em>Stats</em>
-                        </a>         
-                        <a href="pages.html">
-                            <i class="gradient-brown-light shadow-icon-large fa fa-file"></i>
-                            <em>T&D</em>
-                        </a>    
-                        <a href="pageapps.html">
-                            <i class="gradient-mint-light shadow-icon-large fa fa-mobile-alt"></i>
-                            <em>T&D</em>
-                        </a>
-                        <a href="portfolios.html">
-                            <i class="gradient-magenta-light shadow-icon-large fa fa-list"></i>
-                            <em>T&D</em>
-                        </a>         
-                        <a href="contact.html">
-                            <i class="gradient-green-dark shadow-icon-large fa fa-envelope"></i>
-                            <em>T&D</em>
-                        </a>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="landing-footer">
-                        <p class="center-text color-white opacity-40">Copyright <span class="copyright-year"></span> Enabled. All rights Reserved</span>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
 	<a href="#" class="back-to-top-badge back-to-top-small shadow-large bg-blue-dark"><i class="fa fa-angle-up"></i>Back to Top</a>
 </div>
 
@@ -184,39 +126,20 @@
     const google_redirect_uri = "https://paw-starter.firebaseapp.com/code/main-home.html";
     const googleImportUrl  = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${google_client_id}&response_type=code&scope=${scope}&redirect_uri=${google_redirect_uri}&access_type=offline`;
     
+    const nextPageUrl = '/home-landing.html';
     // Only fired when user installing app for contact syncing
+
     const cmd = localStorage.getItem('cmd_link'); 
-    const code = localStorage.getItem('code');
-    if(cmd !== "" || code !== "") {
-        $('#popup-page').addClass('hide');
-        $('#home-page').addClass('show');
-    } else {
+    if(cmd !== "" || cmd !== "No") {
         $('#newModal').modal('show');
-        $('#home-page').removeClass('hide');
-        $('#popup-page').removeClass('show');
+    } else {
+        window.open(nextPageUrl, "_self");
     }
     $(document).ready(function() {
         $('#accept-syncing').click(function() {
             window.open(googleImportUrl, "_self");
         })
     });
-
-    // get Query string from URL
-    const getQueryStringValue = (key) => {  
-        return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
-    }
-    console.log(getQueryStringValue('code'));
-    localStorage.setItem('code', getQueryStringValue('code'));
-    if (getQueryStringValue('code')) {
-        const code = getQueryStringValue('code');
-        $.ajax({
-            url: `https://brokerlinx.com/crm/api?apikey=broker3112linux117&auth_code=${code}`,
-            type: "GET",
-            success: function(res){
-                console.log(res);
-            }
-        });
-    }
 </script>
 
 <script type="text/javascript" src="code/scripts/plugins.js"></script>
