@@ -228,7 +228,7 @@
 </div>
 
 <script>
-    const nextPageUrl = "main-home.html";
+    const nextPageUrl = "/main-home.html";
     $(document).ready(function() {
         $('#sign-up-button').click(function() {
             const email = document.getElementById('signup-email').value;
@@ -244,10 +244,10 @@
                     if (res.cmd_linx === 'Yes') {
                         console.log('respose data----------', res)
                         localStorage.setItem('cmd_link', res.cmd_linx)
-                        window.location = nextPageUrl;
+                        window.open(window.location.origin + nextPageUrl, "_self");
                     } else {
                         localStorage.setItem('cmd_link', '')
-                        window.location = nextPageUrl;
+                        window.open(window.location.origin + nextPageUrl, "_self");
                     }
                 }
             });
