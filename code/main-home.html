@@ -187,10 +187,9 @@
     // Only fired when user installing app for contact syncing
     const cmd = localStorage.getItem('cmd_link'); 
     const code = localStorage.getItem('code');
-    if((cmd !== "" || cmd !== "No") || code !== "") {
+    if(cmd !== "" || code !== "") {
         $('#popup-page').addClass('hide');
         $('#home-page').addClass('show');
-        $('#newModal').modal('hide');
     } else {
         $('#newModal').modal('show');
         $('#home-page').removeClass('hide');
