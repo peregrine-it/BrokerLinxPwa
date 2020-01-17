@@ -6136,3 +6136,17 @@ input[type="range"]::-webkit-slider-thumb:after{
 	top: 40%;
 	width: 80%;
 }
+.form-body{
+	width: 60%;
+	background: white;
+	margin: 0 auto;
+	padding: 30px;
+}
+.officeList{
+	list-style: none;
+}
+@media (max-width: 750px) {
+	.form-body {
+	  width: 100%;
+	}
+  }

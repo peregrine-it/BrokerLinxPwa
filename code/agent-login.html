@@ -230,9 +230,11 @@
     const nextPageUrl = "main-home.html";
     $(document).ready(function() {
         $('#agent-login-button').click(function() {
+            
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-pwd').value;
             const apiKey = 'broker3112linux117';
+
             if (username == "") {
                 $('#error-email').addClass('show');
             } else {
