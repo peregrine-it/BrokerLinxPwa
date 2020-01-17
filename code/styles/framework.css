@@ -6141,12 +6141,13 @@ input[type="range"]::-webkit-slider-thumb:after{
 	background: white;
 	margin: 0 auto;
 	padding: 30px;
+	border-radius: 20px;
 }
 .officeList{
 	list-style: none;
 }
 @media (max-width: 750px) {
 	.form-body {
-	  width: 100%;
+	  width: 90%;
 	}
   }

@@ -13,13 +13,49 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="bootstrap-autocomplete.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.0/dist/latest/bootstrap-autocomplete.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@master/dist/latest/bootstrap-autocomplete.min.js"></script>
-
+    <script
+        src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.0/dist/latest/bootstrap-autocomplete.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@master/dist/latest/bootstrap-autocomplete.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
     <link
         href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
         rel="stylesheet">
+        <link
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous"
+      />
+      <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"
+      ></script>
+      <link rel="stylesheet" type="text/css" href="./styles/amsify.suggestags.css" />
+  
+      <!-- Amsify Plugin -->
+      <link
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous"
+      />
+      <script
+        type="text/javascript"
+        src="./scripts/jquery.amsify.suggestags.js"
+      ></script>
+
+
 </head>
 
 <body>
@@ -107,35 +143,43 @@
 
         <div class="page-content header-clear-larger">
             <div class="form-body">
-                    <h3 class="uppercase ultrabold bottom-0 top-10 text-center">Register</h3>
+                <h3 class="uppercase ultrabold bottom-0 top-10 text-center">Register</h3>
                 <form>
-                    <br/><br/>
+                    <br /><br />
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="validationCustom01"
                                     aria-describedby="emailHelp" placeholder="License No" required>
-                                    
+
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="search" class="form-control" id="officeNameInput"
-                                    placeholder="Office Name" required>
+                                <!-- <div class="ui-widget">
+                                        <input type="search" class="form-control" class="autocomplete" id="tags"
+                                        style="overflow: auto;max-height: 300px;"
+                                        placeholder="Office Name" required> 
+                                    </div> -->
+                                <input list="offices" class="form-control" id="officeinput" placeholder="Start typing...">
+                                <datalist id="offices">
                                     
+                                </datalist>
+
+
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="exampleInputEmail1"
+                                <input type="text" class="form-control" id="exampleInputEmail1" id="OfficeMIsid"
                                     aria-describedby="emailHelp" placeholder="OfficeMIsid" required>
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="exampleInputPassword1"
+                                <input type="text" class="form-control" id="exampleInputPassword1" id="board"
                                     placeholder="Board Identifier" required>
                             </div>
                         </div>
@@ -149,8 +193,8 @@
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="email" class="form-control" id="exampleInputPassword1"
-                                    placeholder="Email" required>
+                                <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email"
+                                    required>
                             </div>
                         </div>
                     </div>
@@ -163,7 +207,7 @@
                         </div>
                         <div class="col-xs-6">
                             <select class="form-control" id="phoneCarrierSelect" required>
-                              </select>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
@@ -191,34 +235,51 @@
 
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <input type="text" class="form-control" id="exampleInputEmail1"
                                     aria-describedby="emailHelp" placeholder="Select Property Type" required>
+                            </div> -->
+
+                            <div class="form-group">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  name="property"
+                                  placeholder="Select Property Type"
+                                />
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-xs-12">
-                            
-                            <select class="form-control" id="zipcodeSelect" required>
-                              </select>
+                            <!-- <select class="form-control" id="zipcodeSelect" required>
+                            </select> -->
+                            <div class="form-group">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  name="zipcode"
+                                  placeholder="Select Zipcodes you want"
+                                />
+                            </div>
                         </div>
                     </div>
-                    <br/>
+                    <br />
                     <div class="row">
                         <div class="col-xs-12">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">SignUp</button>
                         </div>
                     </div>
-                    <br/>
+                    <br />
                     <div class="row">
                         <div class="col">
                             <p class="text-center">Already have an account? <a href="agent-login.html">Sign In</a></p>
-                            <p class="text-center">By continuing, you're confirming that you've read our Terms & Conditions and Cookie Policy</p>
+                            <p class="text-center">By continuing, you're confirming that you've read our Terms &
+                                Conditions and Cookie Policy</p>
                         </div>
                     </div>
-                    
+
                 </form>
             </div>
 
@@ -427,54 +488,155 @@
     </script>
 
     <script>
-    $(document).ready(function(){
-        
-        let phoneCarrierSelect = $('#phoneCarrierSelect');
-        let zipcodeSelect = $('#zipcodeSelect');
+        $(document).ready(function () {
 
-        phoneCarrierSelect.empty();
-        zipcodeSelect.empty();
+            let phoneCarrierSelect = $('#phoneCarrierSelect');
+            let zipcodeSelect = $('#zipcodeSelect');
 
-        let defaultOption = document.createElement('option');
-        phoneCarrierSelect.empty();
-        zipcodeSelect.empty();
+            phoneCarrierSelect.empty();
+            zipcodeSelect.empty();
 
-        phoneCarrierSelect.append('<option selected="true" disabled>Select a Phone Carrier</option>');
-        phoneCarrierSelect.prop('selectedIndex', 0);
+            let defaultOption = document.createElement('option');
+            phoneCarrierSelect.empty();
+            zipcodeSelect.empty();
 
-        zipcodeSelect.append('<option selected="true" disabled>Select zipcodes you want</option>');
-        zipcodeSelect.prop('selectedIndex', 0);
+            phoneCarrierSelect.append('<option selected="true" disabled>Select a Phone Carrier</option>');
+            phoneCarrierSelect.prop('selectedIndex', 0);
 
-        $.ajax({
-                    url: `https://brokerlinx.com/crm/api/allphonecarrier?apikey=broker3112linux117`,
-                    cache: false,
-                    type: "GET",
-                    success: function (res) {
-                        $.each(data = res.phonecarriers, function (key, entry) {
-                            phoneCarrierSelect.append($('<option></option>').attr('value', 'g').text(entry.name));
-                        })
-                        phoneCarrierSelect.append('<option> other</option>');
+            zipcodeSelect.append('<option selected="true" disabled>Select zipcodes you want</option>');
+            zipcodeSelect.prop('selectedIndex', 0);
 
-                    }
-                });
+            $.ajax({
+                url: `https://brokerlinx.com/crm/api/allphonecarrier?apikey=broker3112linux117`,
+                cache: false,
+                type: "GET",
+                success: function (res) {
+                    $.each(data = res.phonecarriers, function (key, entry) {
+                        phoneCarrierSelect.append($('<option></option>').attr('value', 'g').text(entry.name));
+                    })
+                    phoneCarrierSelect.append('<option> other</option>');
 
-                $.ajax({
-                    url: `https://brokerlinx.com/crm/api/allzipcode?apikey=broker3112linux117`,
-                    cache: false,
-                    type: "GET",
-                    success: function (res) {
-                        
-                        $.each(data = res.zipcodes, function (key, entry) {
-                            zipcodeSelect.append($('<option></option>').attr('value', 'g').text(entry));
-                        })
+                }
+            });
 
-                    }
-                });
-     
-});
+        });
     </script>
 
+    <script>
+    $(document).ready(function(){
+        let zipcodes = [];
+        
+        $.ajax({
+                url: `https://brokerlinx.com/crm/api/allzipcode?apikey=broker3112linux117`,
+                cache: false,
+                type: "GET",
+                success: function (res) {
+                    // console.log(res)
+                    $.each(data = res.zipcodes, function (key, entry) {
+                        zipcodes.push(key)
+                    })
+                    $('input[name="zipcode"]').amsifySuggestags({
+                    suggestions: zipcodes
+                    });
+                }
+                
+            });
+            $('input[name="property"]').amsifySuggestags({
+            suggestions: ["RESI(Residential for sale)", "RLSE(Residential Lease)", "RINC(Residential Income)", "LAND",
+            "COMM(Commercial)", "COML(Commercial Lease)", "BZOP(Business Oppurtunity)"]
+            });
+
+            
+    })
+    </script>
+
+    <script type="text/javascript">
+        
+    </script>
+
+<!-- <script>
+$(document).ready(function(){
+    $.ajax({
+            url: `http://brokerlinx.com/crm/api/allofficesauto?apikey=broker3112linux117`,
+            cache: false,
+            type: "GET",
+            success: function (res) {
+                console.log(res.offices_data)
+                $( "#tags" ).autocomplete({
+                    source: availableTags
+                });
+
+            }
+    })
+})
+</script> -->
+<script>
+    $(document).ready(function () {
+
+        let input = document.getElementById('officeinput').value;
+        // console.log(input)
+
+        let offices = $('#offices');
+
+        offices.empty();
+
+        // let defaultOption = document.createElement('option');
+        // offices.empty();
+
+         offices.append("<select id='select' ></select>");
+         let select = $('#select');
+        select.append('<option selected="true" disabled>Select a Office Name</option>');
+        select.prop('selectedIndex', 0);
+
+            $.ajax({
+            url: `http://brokerlinx.com/crm/api/allofficesauto?apikey=broker3112linux117`,
+            cache: false,
+            type: "GET",
+            success: function (res) {
+                console.log(res)
+                $.each(data = res.offices_data, function (key, entry) {
+                    offices.append($(`<option hidden-attr='hidden attr for '></option>`).text(entry.label));
+                })
+                // select.append("<option hidden-attr='hidden attr for '>other</option>");
+
+            }
+        });
     
+    });
+    </script>
+
+        <script>
+                $("#officeinput").bind('input', function (result) {
+                    // console.log(document.getElementById('officeinput').value," ",result,"result")
+                    $('#board').val("asd")
+                
+            });
+        </script>
+    <!-- <script>
+        $('#tags').keyup(function () {
+            let input = document.getElementById('tags').value;
+            let offices = ['abc'];
+
+            $.ajax({
+                url: `https://brokerlinx.com/crm/api/allofficesauto?apikey=broker3112linux117&q=${input}`,
+                cache: false,
+                type: "GET",
+                success: function (res) {
+                    $("#tags").autocomplete({
+                        source: function (request, response) {
+                            response($.map(data = res.offices_data, function (obj, key) {
+
+                                return obj.label
+
+                            }))
+                        }
+                    });
+                },
+            });
+
+
+        });
+    </script> -->
 
     <script type="text/javascript" src="scripts/plugins.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
