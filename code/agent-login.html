@@ -227,7 +227,7 @@
 </div>
 
 <script>
-    const nextPageUrl = "main-home.html";
+    const nextPageUrl = "/code/main-home.html";
     $(document).ready(function() {
         $('#agent-login-button').click(function() {
             
@@ -257,10 +257,10 @@
                             if (res.cmd_linx === 'Yes') {
                                 console.log('respose data----------', res)
                                 localStorage.setItem('cmd_link', res.cmd_linx)
-                                window.location = nextPageUrl;
+                                window.open(window.location.origin + nextPageUrl, "_self");
                             } else {
                                 localStorage.setItem('cmd_link', '')
-                                window.location = nextPageUrl;
+                                window.open(window.location.origin + nextPageUrl, "_self");
                             }
                         } else {
                             $('#error').addClass('show');
