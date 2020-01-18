@@ -149,7 +149,7 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="validationCustom01"
+                                <input type="text" class="form-control" id="license_no"
                                     aria-describedby="emailHelp" placeholder="License No" required>
 
                             </div>
@@ -161,7 +161,7 @@
                                         style="overflow: auto;max-height: 300px;"
                                         placeholder="Office Name" required> 
                                     </div> -->
-                                <input list="offices" class="form-control" id="officeinput" placeholder="Start typing...">
+                                <input list="offices" class="form-control" id="office_name" placeholder="Start typing...">
                                 <datalist id="offices">
                                     
                                 </datalist>
@@ -173,13 +173,13 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="exampleInputEmail1" id="OfficeMIsid"
-                                    aria-describedby="emailHelp" placeholder="OfficeMIsid" required>
+                                <input type="text" class="form-control" id="office_id"
+                                    aria-describedby="emailHelp" placeholder="officeMIsid" required>
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="exampleInputPassword1" id="board"
+                                <input type="text" class="form-control" id="board"
                                     placeholder="Board Identifier" required>
                             </div>
                         </div>
@@ -187,13 +187,13 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="exampleInputEmail1"
+                                <input type="text" class="form-control" id="agent_name"
                                     aria-describedby="emailHelp" placeholder="Agent Name" required>
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email"
+                                <input type="email" class="form-control" id="email" placeholder="Email"
                                     required>
                             </div>
                         </div>
@@ -201,7 +201,7 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="exampleInputEmail1"
+                                <input type="text" class="form-control" id="phone"
                                     aria-describedby="emailHelp" placeholder="Phone" required>
                             </div>
                         </div>
@@ -213,7 +213,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="exampleInputEmail1"
+                                <input type="text" class="form-control" id="Carrier"
                                     aria-describedby="emailHelp" placeholder="Carrier Name" required>
                             </div>
                         </div>
@@ -221,13 +221,13 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="password" class="form-control" id="exampleInputEmail1"
+                                <input type="password" class="form-control" id="password"
                                     aria-describedby="emailHelp" placeholder="Password" required>
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                <input type="password" class="form-control" id="confirm_password"
                                     placeholder="Confirm Password" required>
                             </div>
                         </div>
@@ -245,6 +245,7 @@
                                   type="text"
                                   class="form-control"
                                   name="property"
+                                  id="specializations"
                                   placeholder="Select Property Type"
                                 />
                             </div>
@@ -260,6 +261,7 @@
                                   type="text"
                                   class="form-control"
                                   name="zipcode"
+                                  id="zip_codes"
                                   placeholder="Select Zipcodes you want"
                                 />
                             </div>
@@ -268,7 +270,7 @@
                     <br />
                     <div class="row">
                         <div class="col-xs-12">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">SignUp</button>
+                            <button id="sign-up-button" type="button" class="btn btn-primary btn-lg btn-block">SignUp</button>
                         </div>
                     </div>
                     <br />
@@ -460,34 +462,6 @@
     </div>
 
     <script>
-        const nextPageUrl = "main-home.html";
-        $(document).ready(function () {
-            $('#sign-up-button').click(function () {
-                const email = document.getElementById('signup-email').value;
-                const username = document.getElementById('signup-email').value;
-                const password = document.getElementById('signup-pwd').value;
-                const confirmation_password = document.getElementById('signup-confirm-pwd').value;
-                const apiKey = 'broker3112linux117';
-                $.ajax({
-                    url: `https://brokerlinx.com/crm/api/login?username=${username}&password=${password}&apikey=${apiKey}`,
-                    cache: false,
-                    type: "POST",
-                    success: function (res) {
-                        if (res.cmd_linx === 'Yes') {
-                            console.log('respose data----------', res)
-                            localStorage.setItem('cmd_link', res.cmd_linx)
-                            window.location = nextPageUrl;
-                        } else {
-                            localStorage.setItem('cmd_link', '')
-                            window.location = nextPageUrl;
-                        }
-                    }
-                });
-            })
-        });
-    </script>
-
-    <script>
         $(document).ready(function () {
 
             let phoneCarrierSelect = $('#phoneCarrierSelect');
@@ -532,18 +506,18 @@
                 type: "GET",
                 success: function (res) {
                     // console.log(res)
-                    $.each(data = res.zipcodes, function (key, entry) {
+                    res.zipcodes.forEach((key, entry) => {
                         zipcodes.push(key)
                     })
                     $('input[name="zipcode"]').amsifySuggestags({
-                    suggestions: zipcodes
+                        suggestions: zipcodes
                     });
                 }
                 
             });
             $('input[name="property"]').amsifySuggestags({
-            suggestions: ["RESI(Residential for sale)", "RLSE(Residential Lease)", "RINC(Residential Income)", "LAND",
-            "COMM(Commercial)", "COML(Commercial Lease)", "BZOP(Business Oppurtunity)"]
+                suggestions: ["RESI", "RLSE", "RINC", "LAND",
+                "COMM", "COML", "BZOP"]
             });
 
             
@@ -571,9 +545,11 @@ $(document).ready(function(){
 })
 </script> -->
 <script>
+    let officeData = [];
+    let selectedOffice = [];
     $(document).ready(function () {
 
-        let input = document.getElementById('officeinput').value;
+        let input = document.getElementById('office_name').value;
         // console.log(input)
 
         let offices = $('#offices');
@@ -582,11 +558,10 @@ $(document).ready(function(){
 
         // let defaultOption = document.createElement('option');
         // offices.empty();
-
-         offices.append("<select id='select' ></select>");
-         let select = $('#select');
-        select.append('<option selected="true" disabled>Select a Office Name</option>');
-        select.prop('selectedIndex', 0);
+            offices.append("<select id='select' ></select>");
+            let select = $('#select');
+            select.append('<option selected="true" disabled>Select a Office Name</option>');
+            select.prop('selectedIndex', 0);
 
             $.ajax({
             url: `http://brokerlinx.com/crm/api/allofficesauto?apikey=broker3112linux117`,
@@ -594,6 +569,7 @@ $(document).ready(function(){
             type: "GET",
             success: function (res) {
                 console.log(res)
+                officeData = res.offices_data;
                 $.each(data = res.offices_data, function (key, entry) {
                     offices.append($(`<option hidden-attr='hidden attr for '></option>`).text(entry.label));
                 })
@@ -601,17 +577,61 @@ $(document).ready(function(){
 
             }
         });
+
+        $(document).ready(function () {
+            $("#office_name").bind('input', function (result) {
+                selectedOffice = officeData.find((office) => {
+                    return office.label.toLowerCase().localeCompare(result.target.value.toLowerCase());
+                });
+                $('#office_id').val(selectedOffice.office_id);
+                $('#board').val(selectedOffice.board_name);
+                // console.log(document.getElementById('officeinput').value," ",result,"result")
+            });
+        });
     
     });
-    </script>
 
-        <script>
-                $("#officeinput").bind('input', function (result) {
-                    // console.log(document.getElementById('officeinput').value," ",result,"result")
-                    $('#board').val("asd")
-                
-            });
-        </script>
+
+    const nextPageUrl = "/code/home-landing.html";
+        $(document).ready(function () {
+            $('#sign-up-button').click(function () {
+                const data = {
+                    license_no: document.getElementById('license_no').value,
+                    office_name: document.getElementById('office_name').value,
+                    office_id: document.getElementById('office_id').value,
+                    board: document.getElementById('board').value,
+                    email: document.getElementById('email').value,
+                    agent_name: document.getElementById('agent_name').value,
+                    phone: document.getElementById('phone').value,
+                    password: document.getElementById('password').value,
+                    Carrier: document.getElementById('Carrier').value,
+                    ListOfficePhone: selectedOffice.ListOfficePhone,
+                    specializations: document.getElementById('specializations').value,
+                    zip_codes: document.getElementById('zip_codes').value,
+                    mls_no: selectedOffice.mls_no,
+                    MlsName: selectedOffice.mls_name,
+                    apikey: 'broker3112linux117',
+                };
+                $.ajax({
+                    url: `https://brokerlinx.com/crm/api/agentsignup`,
+                    cache: false,
+                    data : data,
+                    type: "POST",
+                    success: function (res) {
+                        if (res.success) {
+                            // console.log('respose data----------', res)
+                            // localStorage.setItem('cmd_link', res.cmd_linx)
+                            window.open(nextPageUrl, "_self");
+                        } else {
+                            // localStorage.setItem('cmd_link', '')
+                            // window.open(nextPageUrl, "_self");
+                        }
+                    }
+                });
+            })
+        });
+
+    </script>
     <!-- <script>
         $('#tags').keyup(function () {
             let input = document.getElementById('tags').value;
