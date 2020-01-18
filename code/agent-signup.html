@@ -564,8 +564,7 @@ $(document).ready(function(){
             select.prop('selectedIndex', 0);
 
             $.ajax({
-            url: `http://brokerlinx.com/crm/api/allofficesauto?apikey=broker3112linux117`,
-            cache: false,
+            url: `https://brokerlinx.com/crm/api/allofficesauto?apikey=broker3112linux117`,
             type: "GET",
             success: function (res) {
                 console.log(res)
