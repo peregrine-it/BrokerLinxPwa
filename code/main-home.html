@@ -128,11 +128,11 @@
     const google_redirect_uri = "https://paw-starter.firebaseapp.com/code/home-landing.html";
     const googleImportUrl  = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${google_client_id}&response_type=code&scope=${scope}&redirect_uri=${google_redirect_uri}&access_type=offline&all_time_refresh_token='prompt=consent&'`;
     
-    const nextPageUrl = '/home-landing.html';
+    const nextPageUrl = '/code/home-landing.html';
     // Only fired when user installing app for contact syncing
 
     const cmd = localStorage.getItem('cmd_link'); 
-    if(cmd !== "" || cmd !== "No") {
+    if(cmd === "" || cmd === 'No') {
         $('#newModal').modal('show');
     } else {
         window.open(nextPageUrl, "_self");
