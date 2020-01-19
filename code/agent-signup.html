@@ -580,10 +580,10 @@ $(document).ready(function(){
         $(document).ready(function () {
             $("#office_name").bind('input', function (result) {
                 selectedOffice = officeData.find((office) => {
-                    return office.label.toLowerCase().localeCompare(result.target.value.toLowerCase());
+                    return office.label.trim().toLowerCase() === result.target.value.toLowerCase();
                 });
-                $('#office_id').val(selectedOffice.office_id);
-                $('#board').val(selectedOffice.board_name);
+                $('#office_id').val(selectedOffice ? selectedOffice.office_id : '');
+                $('#board').val(selectedOffice ? selectedOffice.board_name : '');
                 // console.log(document.getElementById('officeinput').value," ",result,"result")
             });
         });
