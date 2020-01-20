@@ -83,36 +83,43 @@
 
 
         <div class="page-login bg-white top-0">
-            <img class="preload-image login-bg shadow-large responsive-image bottom-0" src="images/pictures/9w.jpg" data-src="images/pictures/9w.jpg" alt="img">
-            <img class="preload-image login-image shadow-icon-large" src="images/pictures/0s.png" data-src="images/pictures/0s.png" alt="img">
-            <div class="content bottom-0">
-                <h3 class="uppercase ultrabold top-10 bottom-0">Login</h3>
-                <p class="smaller-text bottom-15">Hello, stranger! Please enter your credentials below.</p>
-                <div class="formValidationError" id="error"></div>
-                <div class="formValidationError" id="error-email">Please enter your username </div>
-                <div class="page-login-field top-15">
-                    <i class="fa fa-user"></i>
-                    <input id="login-username" type="text" placeholder="Username">
-                    <em>(required)</em>
+            <form class="contactForm" id="agentLoginForm">
+                <img class="preload-image login-bg shadow-large responsive-image bottom-0" src="images/pictures/9w.jpg" data-src="images/pictures/9w.jpg" alt="img">
+                <img class="preload-image login-image shadow-icon-large" src="images/pictures/0s.png" data-src="images/pictures/0s.png" alt="img">
+                <div class="content bottom-0">
+                    <h3 class="uppercase ultrabold top-10 bottom-0">Login</h3>
+                    <p class="smaller-text bottom-15">Hello, stranger! Please enter your credentials below.</p>
+                    <div class="formValidationError" id="error"></div>
+                    <!-- <div class="formValidationError" id="error-email">Please enter your username </div> -->
+                    <div class="page-login-field top-15">
+                        <i class="fa fa-user"></i>
+                        <input id="login-username" type="text" placeholder="Username" required>
+                        <em>(required)</em>
+                    </div>
+                    <!-- <div class="formValidationError" id="error-password">Please enter your password </div> -->
+                    <div class="page-login-field bottom-20">
+                        <i class="fa fa-lock"></i>
+                        <input id="login-pwd" type="password" placeholder="Password" required>
+                        <em>(required)</em>
+                    </div>
+                    <div class="page-login-links bottom-10">
+                        <a class="forgot float-right" href="agent-signup.html"><i class="fa fa-user float-right"></i>Create Account</a>
+                        <a class="create float-left" href="page-forgot.html"><i class="fa fa-eye"></i>Forgot Password</a>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button id="agent-login-button" type="submit" class="btn btn-success btn-lg btn-block">Login</button>
+                        </div>
+                    </div>
+                    <!-- <a href="javascript:void(0)" id="agent-login-button" class="button button-green button-full shadow-icon-large button-round button-s uppercase ultrabold">LOGIN</a> -->
                 </div>
-                <div class="formValidationError" id="error-password">Please enter your password </div>
-                <div class="page-login-field bottom-20">
-                    <i class="fa fa-lock"></i>
-                    <input id="login-pwd" type="password" placeholder="Password">
-                    <em>(required)</em>
-                </div>
-                <div class="page-login-links bottom-10">
-                    <a class="forgot float-right" href="agent-signup.html"><i class="fa fa-user float-right"></i>Create Account</a>
-                    <a class="create float-left" href="page-forgot.html"><i class="fa fa-eye"></i>Forgot Password</a>
-                    <div class="clear"></div>
-                </div>
-                <a href="javascript:void(0)" id="agent-login-button" class="button button-green button-full shadow-icon-large button-round button-s uppercase ultrabold">LOGIN</a>
-            </div>
+            </form>
         </div>
 
 	</div>
 
-    <div id="menu-contact" data-menu-height="460" class="menu menu-box-modal bg-white shadow-large">
+    <!-- <div id="menu-contact" data-menu-height="460" class="menu menu-box-modal bg-white shadow-large">
         <div class="menu-scroll">
             <h3 class="uppercase ultrabold center-text top-0 color-black font-27">Get in Touch</h3>
             <p class="center-text left-30 right-30 bottom-20 color-black top-10 opacity-70">
@@ -157,7 +164,7 @@
 				</form>
 			</div>
         </div>
-    </div>
+    </div> -->
 
 	<div id="menu-phone" data-menu-height="285" class="menu menu-box-bottom bg-white">
         <h1 class="center-text top-20 bottom-0 uppercase ultrabold">GIVE US A CALL</h1>
@@ -229,24 +236,12 @@
 <script>
     const nextPageUrl = "/code/main-home.html";
     $(document).ready(function() {
-        $('#agent-login-button').click(function() {
-            
+        $('#agentLoginForm').submit(function(e) {
+            e.preventDefault();
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-pwd').value;
             const apiKey = 'broker3112linux117';
 
-            if (username == "") {
-                $('#error-email').addClass('show');
-            } else {
-                $('#error').removeClass('show')
-                $('#error-email').removeClass('show');
-            }
-            if (password == "") {
-                $('#error').removeClass('show')
-                $('#error-password').addClass('show');
-            } else {
-                $('#error-password').removeClass('show');
-            }
             if (username !== '' && password !== '') {
                 $.ajax({
                     url: `https://brokerlinx.com/crm/api/login?username=${username}&password=${password}&apikey=${apiKey}`,

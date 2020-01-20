@@ -144,7 +144,8 @@
         <div class="page-content header-clear-larger">
             <div class="form-body">
                 <h3 class="uppercase ultrabold bottom-0 top-10 text-center">Register</h3>
-                <form>
+                <form id="agentSignUp"> 
+                    <div class="formValidationError" id="error"></div>
                     <br /><br />
                     <div class="row">
                         <div class="col-xs-6">
@@ -161,7 +162,7 @@
                                         style="overflow: auto;max-height: 300px;"
                                         placeholder="Office Name" required> 
                                     </div> -->
-                                <input list="offices" class="form-control" id="office_name" placeholder="Start typing...">
+                                <input list="offices" class="form-control" id="office_name" placeholder="Office Name">
                                 <datalist id="offices">
                                     
                                 </datalist>
@@ -174,7 +175,7 @@
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="office_id"
-                                    aria-describedby="emailHelp" placeholder="officeMIsid" required>
+                                    aria-describedby="emailHelp" placeholder="Office MIsid" required>
                             </div>
                         </div>
                         <div class="col-xs-6">
@@ -196,18 +197,6 @@
                                 <input type="email" class="form-control" id="email" placeholder="Email"
                                     required>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="phone"
-                                    aria-describedby="emailHelp" placeholder="Phone" required>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <select class="form-control" id="phoneCarrierSelect" required>
-                            </select>
                         </div>
                     </div>
                     <!-- <div class="row">
@@ -233,6 +222,23 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="phone"
+                                    aria-describedby="emailHelp" placeholder="Phone" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <select class="form-control" placeholder="Select a phone carrier" id="phoneCarrierSelect" required></select>
+                            </div>
+                        </div>
+                    </div>
+                        
                     <div class="row">
                         <div class="col-xs-12">
                             <!-- <div class="form-group">
@@ -270,7 +276,7 @@
                     <br />
                     <div class="row">
                         <div class="col-xs-12">
-                            <button id="sign-up-button" type="button" class="btn btn-primary btn-lg btn-block">SignUp</button>
+                            <button id="sign-up-button" type="submit" class="btn btn-primary btn-lg btn-block">SignUp</button>
                         </div>
                     </div>
                     <br />
@@ -593,7 +599,8 @@ $(document).ready(function(){
 
     const nextPageUrl = "/code/home-landing.html";
         $(document).ready(function () {
-            $('#sign-up-button').click(function () {
+            $('#agentSignUp').submit(function (e) {
+                e.preventDefault();
                 const data = {
                     license_no: document.getElementById('license_no').value,
                     office_name: document.getElementById('office_name').value,
@@ -622,6 +629,8 @@ $(document).ready(function(){
                             // localStorage.setItem('cmd_link', res.cmd_linx)
                             window.open(nextPageUrl, "_self");
                         } else {
+                            $('#error').addClass('show');
+                            $('#error').html(`${res.msg}`);
                             // localStorage.setItem('cmd_link', '')
                             // window.open(nextPageUrl, "_self");
                         }
