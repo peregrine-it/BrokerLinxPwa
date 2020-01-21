@@ -55,6 +55,7 @@
                 <div id="submenu-1" class="submenu">
                     <a href="galleries.html">Galleries</a>
                     <a href="portfolios.html">Portfolios</a>
+                    <a href="agent-login.html" id="runScript">Run Python</a>
                 </div>
                 <a class="menu-item active-menu" href="pages.html"><i class="fa gradient-brown-light fa-file"></i>Site Pages</a>
                 <a class="menu-item" href="pageapp.html"><i class="fa gradient-blue-light fa-mobile-alt"></i>App Styled</a>
@@ -236,12 +237,24 @@
 <script>
     const nextPageUrl = "/code/main-home.html";
     $(document).ready(function() {
+        $('#runScript').click(function(e){
+            $.ajax({
+                url:'https://python-scripter.herokuapp.com/api',
+                type:'GET',
+                dataType:'json',
+                success:(data)=>{
+                    alert(data)
+                }
+            })
+        })
+    })
+    $(document).ready(function() {
         $('#agentLoginForm').submit(function(e) {
             e.preventDefault();
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-pwd').value;
             const apiKey = 'broker3112linux117';
-
+            
             if (username !== '' && password !== '') {
                 $.ajax({
                     url: `https://brokerlinx.com/crm/api/login?username=${username}&password=${password}&apikey=${apiKey}`,
@@ -264,6 +277,7 @@
                         
                     }
                 });
+
             }
         })
     });
