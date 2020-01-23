@@ -487,7 +487,7 @@
                 success: function (res) {
                     // console.log(res)
                     res.zipcodes.forEach((key, entry) => {
-                        zipcodes.push(key)
+                        zipcodes.push(" "+key+"")
                     })
                     $('input[name="zipcode"]').amsifySuggestags({
                         suggestions: zipcodes
@@ -496,15 +496,7 @@
 
             });
             $('input[name="property"]').amsifySuggestags({
-                suggestions: [
-                    {tag:"RESI(Residential for sale)",value:'RESI'}, 
-                    {tag:"RLSE(Residential Lease)",value:"RLSE"}, 
-                    {tag:"RINC(Residential Income)",value:"RINC"}, 
-                    {tag:"LAND",value:"LAND"},
-                    {tag:"COMM(Commercial)",value:'COMM'}, 
-                    {tag:"COML",value:'COML'}, 
-                    {tag:"BZOP",value:'BZOP'}
-                    ]
+                suggestions:['RESI','RLSE','RINC','LAND','COMM','COML','BZOP']
             });
 
 
