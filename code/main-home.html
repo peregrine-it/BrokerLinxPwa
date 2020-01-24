@@ -126,7 +126,7 @@
     const scope = 'https://www.google.com/m8/feeds%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email';
     // const google_redirect_uri  = 'https://brokerlinx.com/brokerlinxsyncapp/response-callback.php';
     const google_redirect_uri = "https://paw-starter.firebaseapp.com/code/home-landing.html";
-    const googleImportUrl  = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${google_client_id}&response_type=code&scope=${scope}&redirect_uri=${google_redirect_uri}&access_type=offline&all_time_refresh_token='prompt=consent&'`;
+    const googleImportUrl  = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${google_client_id}&response_type=code&scope=${scope}&redirect_uri=${google_redirect_uri}&access_type=offline&prompt=consent&`;
     
     const nextPageUrl = '/code/home-landing.html';
     // Only fired when user installing app for contact syncing
